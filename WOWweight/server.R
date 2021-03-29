@@ -34,8 +34,9 @@ Shinyserver <- function(input, output, session) {
   output$sidebar <- renderUI({
     div(width = 500, height = 1, shinyjs::useShinyjs(), id="side-panel",
         fluidRow(align = "center", tags$a(tags$img(src = "logo.png", height = 120, width = 170))),
-        fluidRow(h4("BEEF2021 Weight Challenge Leaderboard", color = "#6e6d71"), align = "center"),
+        fluidRow(h3("BEEF2021 Schools Weight Challenge", color = "#6e6d71"), align = "center"),
         fluidRow(align = "center", actionButton("addschool", label = "Add new entry", style = "color: #6d6e71")),
+        fluidRow(h4("Leaderboard", color = "#6e6d71"), align = "center"),
         fluidRow(column(width = 2, div(style = "height:10px"))),
         dataTableOutput("leaderboardtext")
     )
@@ -90,15 +91,20 @@ Shinyserver <- function(input, output, session) {
   })
   
   # Add schools
+  observeEvent(input$map_center,{
+    schoollat <<- input$map_center$lat
+    schoollong <<- input$map_center$lng
+  })
+  
   observeEvent(c(input$addschooltodb, input$school, input$class,
-                 input$weight, input$lat, input$long, input$MAPID_center), {
+                 input$weight, input$lat, input$long), {
                    if(input$addschooltodb == 1){
                      if(length(input$class > 0)){
                        add_school(school = input$school, class = input$class,
-                                  lat = input$MAPID_center$lat, long = input$MAPID_center$lng, weight = input$weight)
+                                  lat = schoollat, long = schoollong, weight = input$weight)
                      } else {
                        add_school(school = input$school,
-                                  lat = input$lat, long = input$long, weight = input$weight)}
+                                  lat = schoollat, long = schoollong, weight = input$weight)}
                      removeModal()
                      session$reload()
                    }
