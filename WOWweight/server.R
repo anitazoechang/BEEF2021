@@ -13,7 +13,9 @@ library(DT)
  
 ##### Shiny server #####
 Shinyserver <- function(input, output, session) {
-  schools <<- get_school()
+  user <<- "LaurenOconnor"#Sys.getenv("user")
+  pass <<- "DataMuster"#Sys.getenv("pass")
+  schools <<- get_school(username = user, password= pass)
   leaderboard <- schools[order(schools$weight, decreasing = TRUE),]
   leaderboard$rank <- seq(1:nrow(leaderboard))
   leaderboard <- leaderboard %>%
@@ -104,7 +106,7 @@ Shinyserver <- function(input, output, session) {
                                   lat = schoollat, long = schoollong, weight = input$weight)
                      } else {
                        add_school(school = input$school,
-                                  lat = schoollat, long = schoollong, weight = input$weight)}
+                                  lat = schoollat, long = schoollong, weight = input$weight, username = user, password = pass)}
                      removeModal()
                      session$reload()
                    }
