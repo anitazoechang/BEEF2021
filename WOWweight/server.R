@@ -13,8 +13,8 @@ library(DT)
  
 ##### Shiny server #####
 Shinyserver <- function(input, output, session) {
-  user <<- "LaurenOconnor"#Sys.getenv("user")
-  pass <<- "DataMuster"#Sys.getenv("pass")
+  user <<- Sys.getenv("user")
+  pass <<- Sys.getenv("pass")
   schools <<- get_school(username = user, password= pass)
   leaderboard <- schools[order(schools$weight, decreasing = TRUE),]
   leaderboard$rank <- seq(1:nrow(leaderboard))
