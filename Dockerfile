@@ -18,7 +18,7 @@ RUN apt-get install -y apt-utils \
     libgdal-dev \ 
     libgeos++-dev \
     libproj-dev \
-    libudunits2-dev\ 
+    libudunits2-dev \ 
     libv8-dev \
     libsasl2-dev \
     libxml2-dev \
@@ -34,6 +34,10 @@ RUN R -e "remotes::install_github('rstudio/DT')"
 RUN R -e 'install.packages(c("spdplyr", dependencies = TRUE), repos="https://cloud.r-project.org/",Ncpus=4)'
 RUN R -e "remotes::install_github('PrecisionLivestockManagement/DMApp')"
 RUN R -e "remotes::install_github('anitazoechang/BEEF2021functions@main')"
+RUN R -e 'install.packages(c("shiny", "dashboardthemes", "tidyverse", dependencies = TRUE), repos="https://cloud.r-project.org/",Ncpus=4)'
+RUN R -e 'install.packages(c("shinyalert", "leaflet", dependencies = TRUE), repos="https://cloud.r-project.org/",Ncpus=4)'
+RUN R -e 'install.packages(c("shinyjs", dependencies = TRUE), repos="https://cloud.r-project.org/",Ncpus=4)'
+
 
 # copy the app to the image
 RUN mkdir /root/WOWweight
@@ -45,4 +49,8 @@ COPY Rprofile.site /usr/lib/R/etc/
 
 EXPOSE 3838
 
-CMD ["R", "-e", "shiny::runApp('/root/WOWweight')"]
+CMD ["R", "-e", "shiny::runApp('/root/WOWweight, options = list(port = '3838')')"]
+
+
+
+#end of file

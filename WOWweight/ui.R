@@ -1,6 +1,7 @@
 library(shiny)
 library(shinydashboard)
 library(dashboardthemes)
+library(leaflet)
 
 ### creating custom theme object
 theme_blue_gradient <- shinyDashboardThemeDIY(
