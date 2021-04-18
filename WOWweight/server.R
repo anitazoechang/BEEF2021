@@ -14,26 +14,65 @@ library(DT)
 ##### Shiny server #####
 Shinyserver <- function(input, output, session) {
   
-  user <<- as.character(Sys.getenv("user"))
-  pass <<- as.character(Sys.getenv("pass"))
+  # user <<- as.character(Sys.getenv("user"))
+  # pass <<- as.character(Sys.getenv("pass"))
   
   schools <<- get_school(username = user, password= pass)
-  leaderboard <- schools[order(schools$weight, decreasing = TRUE),]
-  leaderboard$rank <- seq(1:nrow(leaderboard))
-  leaderboard <- leaderboard %>%
-    select(rank, school, class, weight)
-  leaderboard$weight <- paste0(leaderboard$weight, "kg")
-  colnames(leaderboard) <- c("Rank", "School", "Class", "Weight")
-  leaderboard <<- leaderboard
-
-  # Leaderboard
-  output$leaderboardtext <- renderDataTable(datatable(tibble(
-    Rank = leaderboard$Rank,
-    School = leaderboard$School,
-    Class = leaderboard$Class,
-    Weight = leaderboard$Weight),
-    rownames = FALSE))
+  schools <<- schools %>%
+    filter(school != "Central Queensland University")
   
+  if(nrow(schools) != 0){
+    # Leaderboard text
+    leaderboard <- schools[order(schools$weight, decreasing = TRUE),]
+    leaderboard$rank <- seq(1:nrow(leaderboard))
+    leaderboard <- leaderboard %>%
+      select(rank, school, class, weight)
+    leaderboard$weight <- paste0(leaderboard$weight, "kg")
+    colnames(leaderboard) <- c("Rank", "School", "Class", "Weight")
+    leaderboard <<- leaderboard
+    
+    # Leaderboard
+    output$leaderboardtext <- renderDataTable(datatable(tibble(
+      Rank = leaderboard$Rank,
+      School = leaderboard$School,
+      Class = leaderboard$Class,
+      Weight = leaderboard$Weight),
+      rownames = FALSE))
+    
+    # Map
+    output$map <- renderLeaflet({
+      leaflet(schools) %>%
+        addProviderTiles(providers$OpenStreetMap) %>%
+        setView(lng = 147.842393, lat = -24.000942, zoom = 6) %>% 
+        addSearchOSM(options = searchOptions(collapsed = TRUE)) %>%
+        addCircleMarkers(radius = 6, stroke = FALSE, fillOpacity = 0.7,
+                         fillColor = "#d52a2e",
+                         popup = paste(paste(schools$school), 
+                                       paste(schools$class),
+                                       paste0(schools$weight, "kg"),
+                                       sep = "</br>"))
+    })
+    
+  } else {
+    # Leaderboard
+    output$leaderboardtext <- renderDataTable(datatable(tibble(
+      Rank = "",
+      School = "",
+      Class = "",
+      Weight = ""),
+      rownames = FALSE))
+    
+    # Map
+    output$map <- renderLeaflet({
+      leaflet() %>%
+        addProviderTiles(providers$OpenStreetMap) %>%
+        setView(lng = 147.842393, lat = -24.000942, zoom = 6) %>% 
+        addSearchOSM(options = searchOptions(collapsed = TRUE))
+    })
+  }
+
+
+
   # Sidebar
   output$sidebar <- renderUI({
     div(width = 500, height = 1, shinyjs::useShinyjs(), id="side-panel",
@@ -44,19 +83,6 @@ Shinyserver <- function(input, output, session) {
         fluidRow(column(width = 2, div(style = "height:10px"))),
         dataTableOutput("leaderboardtext")
     )
-  })
-  
-  output$map <- renderLeaflet({
-    leaflet(schools) %>%
-      addProviderTiles(providers$OpenStreetMap) %>%
-      setView(lng = 147.842393, lat = -24.000942, zoom = 6) %>% 
-      addSearchOSM(options = searchOptions(collapsed = TRUE)) %>%
-      addCircleMarkers(radius = 6, stroke = FALSE, fillOpacity = 0.7,
-                       fillColor = "#4C9364",
-                       popup = paste(paste(schools$school), 
-                                     paste(schools$class),
-                                     paste0(schools$weight, "kg"),
-                                     sep = "</br>"))
   })
   
   
