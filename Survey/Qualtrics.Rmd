@@ -1,0 +1,43 @@
+---
+# title: "BEEF2021 survey"
+# author: "Anita Chang"
+# date: "19/04/2021"
+# output: pdf_document
+---
+
+```{r setup, include=FALSE, echo = FALSE}
+library(qualtRics)
+library(dplyr)
+
+qualtrics_api_credentials(base_url = "syd1.qualtrics.com", api_key = "F3hJKXRfDwka2FJV3sqqDGCNZuqm46sJC6dVKCgE", install = TRUE,
+                          overwrite = TRUE)
+readRenviron("~/.Renviron")
+df <- fetch_survey(surveyID = "SV_6wXoZMOL6A1ww3Y", force_request = TRUE)
+df <- df %>%
+  filter(Progress == 100)
+df <- df[which.max(df$StartDate),]
+
+name <- ifelse(is.na(df$name), FALSE, TRUE)
+interest_1 <- ifelse(df$interest_1 == "Yes, I'm sorted", FALSE, TRUE)
+interest_2 <- ifelse(df$interest_2 == "Yes, I'm sorted", FALSE, TRUE)
+interest_3 <- ifelse(df$interest_3 == "Yes, I'm sorted", FALSE, TRUE)
+interest_4 <- ifelse(df$interest_4 == "Yes, I'm sorted", FALSE, TRUE)
+interest_5 <- ifelse(df$interest_5 == "Yes, I'm sorted", FALSE, TRUE)
+interest_6 <- ifelse(df$interest_6 == "Yes, I'm sorted", FALSE, TRUE)
+```
+
+## CQUniversity's BEEF2021 Technology Audit
+
+`r if(name == TRUE){paste0("Hello ", df$name, ",")} else {"Hello,"}`
+
+`r if(interest_1 == TRUE){"digital farm map text here"} else {""}`
+
+`r if(interest_2 == TRUE){"feed base monitoring text here"} else {""}`
+
+`r if(interest_3 == TRUE){"herd-level text here"} else {""}`
+
+`r if(interest_4 == TRUE){"individual-level text here"} else {""}`
+
+`r if(interest_5 == TRUE){"genetic evaluation text here"} else {""}`
+
+`r if(interest_6 == TRUE){"financial recording text here"} else {""}`
