@@ -14,12 +14,12 @@ library(DT)
 ##### Shiny server #####
 Shinyserver <- function(input, output, session) {
   
-  # user <<- as.character(Sys.getenv("user"))
-  # pass <<- as.character(Sys.getenv("pass"))
+  user <<- as.character(Sys.getenv("user"))
+  pass <<- as.character(Sys.getenv("pass"))
   
   schools <<- get_school(username = user, password= pass)
-  schools <<- schools %>%
-    filter(school != "Central Queensland University")
+  schools <<- schools #%>%
+    #filter(school != "Central Queensland University")
   
   if(nrow(schools) != 0){
     # Leaderboard text
