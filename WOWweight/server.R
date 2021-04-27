@@ -18,8 +18,6 @@ Shinyserver <- function(input, output, session) {
   pass <<- as.character(Sys.getenv("pass"))
   
   schools <<- get_school(username = user, password= pass)
-  schools <<- schools #%>%
-    #filter(school != "Central Queensland University")
   
   if(nrow(schools) != 0){
     # Leaderboard text
@@ -92,8 +90,8 @@ Shinyserver <- function(input, output, session) {
              column(width = 7, textInput(inputId = "school", label = NULL, value = NULL))),
     fluidRow(column(width = 3, "Class name:"),
              column(width = 7, textInput(inputId = "class", label = NULL, value = NULL))),
-    fluidRow(column(width = 3, "Weight:"),
-             column(width = 7, numericInput(inputId = "weight", label = NULL, value = NULL))),
+    # fluidRow(column(width = 3, "Weight:"),
+    #          column(width = 7, numericInput(inputId = "weight", label = NULL, value = NULL))),
     # fluidRow(column(width = 3, "Latitude:"),
     #          column(width = 7, numericInput(inputId = "lat", label = NULL, value = NULL))),
     # fluidRow(column(width = 3, "Longitude:"),
@@ -104,6 +102,15 @@ Shinyserver <- function(input, output, session) {
                       column(width = 2, actionButton("cancel", "Close", style = "color: #6d6e71"))),
     easyClose = TRUE
     )
+  
+  ##### Weight #####
+  pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin",
+                  username, password)
+  db <- mongolite::mongo(collection = "BeefWoWData", db = "DMIoT", url = pass, verbose = T)
+  weight <- db$find()
+  weight <- weight[which.max(weight$datetime),]
+  weight <- weight$Wt
+  weight <<- as.numeric(weight)
   
   ##### Buttons ######
   # Add school modal
@@ -127,14 +134,14 @@ Shinyserver <- function(input, output, session) {
   })
   
   observeEvent(c(input$addschooltodb, input$school, input$class,
-                 input$weight, input$lat, input$long), {
+                 input$lat, input$long), {
                    if(input$addschooltodb == 1){
                      if(length(input$class > 0)){
                        add_school(school = input$school, class = input$class,
-                                  lat = schoollat, long = schoollong, weight = input$weight, username = user, password = pass)
+                                  lat = schoollat, long = schoollong, weight = weight, username = user, password = pass)
                      } else {
                        add_school(school = input$school,
-                                  lat = schoollat, long = schoollong, weight = input$weight, username = user, password = pass)}
+                                  lat = schoollat, long = schoollong, weight = weight, username = user, password = pass)}
                      removeModal()
                      session$reload()
                    }
