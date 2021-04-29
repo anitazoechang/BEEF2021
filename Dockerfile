@@ -1,4 +1,4 @@
-FROM asia.gcr.io/tcservices/tcbase-r:v2.0.0
+FROM asia.gcr.io/datamusterapp/datamuster/rbase:latest
 
 MAINTAINER Dave Swain Stuart Charters "info@datamuster.net.au"
 

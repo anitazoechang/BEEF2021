@@ -10,10 +10,14 @@ library(tidyverse)
 library(DT)
 # remotes::install_github("anitazoechang/BEEF2021functions@main")
 
-pass <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin",
-                'LaurenOconnor', 'DataMuster')
-db <- mongolite::mongo(collection = "BeefWoWData", db = "DMIoT", url = pass, verbose = T)
-weight <- db$find()
+user <<- as.character(Sys.getenv("user"))
+pass <<- as.character(Sys.getenv("pass"))
+
+url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin",
+                user, pass)
+db <- mongolite::mongo(collection = "BeefWoWData", db = "DMIoT", url = url, verbose = T)
+weight <- db$find() %>%
+  filter(Wt != 0)
 weight <- weight[which.max(weight$datetime),]
 weight <- weight$Wt
 weight <<- as.numeric(weight)
@@ -22,8 +26,8 @@ weight <<- as.numeric(weight)
 ##### Shiny server #####
 Shinyserver <- function(input, output, session) {
   
-  user <<- "LaurenOconnor" #as.character(Sys.getenv("user"))
-  pass <<- "DataMuster" #as.character(Sys.getenv("pass"))
+  user <<- as.character(Sys.getenv("user"))
+  pass <<- as.character(Sys.getenv("pass"))
   
   schools <<- get_school(username = user, password= pass)
   
