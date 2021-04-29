@@ -16,7 +16,7 @@ function(){
   email %>%
     smtp_send(
       from = "precisionlivestockmanagement@gmail.com",
-      to = "t.m.williams@cqu.edu.au", #df$email,
+      to = "d.swain@cqu.edu.au", #df$email,
       subject = "CQUniversity's BEEF2021 Technology Audit",
       credentials = creds_file(file = "/root/supp/gmail_creds")
     )

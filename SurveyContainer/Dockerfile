@@ -4,9 +4,15 @@ FROM gcr.io/dmautoscripts/github.com/precisionlivestockmanagement/dmbaser:a8e27e
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN apt-get install pandoc -y
-RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ eoan main restricted universe"
-RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ eoan-backports main restricted universe"
-RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ eoan-security main restricted universe"
+RUN apt-get install gnupg -y
+RUN apt-get install gnupg1 -y
+RUN apt-get install gnupg2 -y
+RUN apt-get install software-properties-common -y
+RUN gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv 9BDB3D89CE49EC21
+RUN gpg --export --armor 9BDB3D89CE49EC21 | apt-key add -
+#RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ hirsute main universe"
+#RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ hirsute-backports main restricted universe"
+#RUN add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ hirsute-security main restricted universe"
 RUN apt-get update
 RUN apt-get install texlive-xetex -y
 #RUN apt-get install texlive-fonts-recommended -y
@@ -20,14 +26,19 @@ RUN texlua install-getnonfreefonts
 RUN getnonfreefonts --sys arial-urw
 RUN mktexlsr
 RUN tlmgr init-usertree
-RUN tlmgr update --self
-RUN tlmgr update --all
+#RUN tlmgr update --self
+#RUN tlmgr update --all
 #ENV PATH="/usr/local/texlive/2018/bin/x86_64-linux:${PATH}"
 RUN fc-cache -f -v
 
 RUN R -e "devtools::install_github('yihui/tinytex')"
 
 RUN R -e "install.packages(c('knitr', 'ggplot2','grid','gridExtra', 'RSQLite','DBI','mongolite','scales','png','jpeg','kableExtra','blastula'), repos='https://cloud.r-project.org/',Ncpus=4)"
+
+RUN R -e "install.packages(c('qualtRics'), repos='https://cloud.r-project.org/',Ncpus=4)"
+
+RUN R -e "install.packages(c('pander'), repos='https://cloud.r-project.org/',Ncpus=4)"
+
 
 RUN apt-get update
 RUN apt-get install -y apt-utils \
