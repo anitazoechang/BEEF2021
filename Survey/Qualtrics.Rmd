@@ -28,22 +28,13 @@ df <- df %>%
   filter(Progress == 100)
 df <- df[which.max(df$StartDate),]
 
-interest_1 <- ifelse(df$interest_1 == "Yes, I have what I need" | df$interest_1 == "No, and I'm not interested in knowing more" | 
-                       is.na(df$interest_1), FALSE, TRUE)
-interest_2 <- ifelse(df$interest_2 == "Yes, I have what I need" | df$interest_2 == "No, and I'm not interested in knowing more" | 
-                       is.na(df$interest_2), FALSE, TRUE)
-interest_3 <- ifelse(df$interest_3 == "Yes, I have what I need" | df$interest_3 == "No, and I'm not interested in knowing more" | 
-                       is.na(df$interest_3), FALSE, TRUE)
-interest_4 <- ifelse(df$interest_4 == "Yes, I have what I need" | df$interest_4 == "No, and I'm not interested in knowing more" | 
-                       is.na(df$interest_4), FALSE, TRUE)
-interest_5 <- ifelse(df$interest_5 == "Yes, I have what I need" | df$interest_5 == "No, and I'm not interested in knowing more" | 
-                       is.na(df$interest_5), FALSE, TRUE)
-interest_6 <- ifelse(df$interest_6 == "Yes, I have what I need" | df$interest_6 == "No, and I'm not interested in knowing more" | 
-                       is.na(df$interest_6), FALSE, TRUE)
-interest_3_4 <- ifelse(df$interest_2 == "Yes, I have what I need" | df$interest_3 == "Yes, I have what I need" | 
-                         df$interest_2 == "No, and I'm not interested in knowing more" | 
-                         df$interest_3 == "No, and I'm not interested in knowing more" | 
-                         is.na(df$interest_2) | is.na(df$interest_3), FALSE, TRUE)
+interest_1 <- ifelse(df$interest_1 == "Yes, I am interested in learning more", TRUE, FALSE)
+interest_2 <- ifelse(df$interest_2 == "Yes, I am interested in learning more", TRUE, FALSE)
+interest_3 <- ifelse(df$interest_3 == "Yes, I am interested in learning more", TRUE, FALSE)
+interest_4 <- ifelse(df$interest_4 == "Yes, I am interested in learning more", TRUE, FALSE)
+interest_5 <- ifelse(df$interest_5 == "Yes, I am interested in learning more", TRUE, FALSE)
+interest_6 <- ifelse(df$interest_6 == "Yes, I am interested in learning more", TRUE, FALSE)
+interest_7 <- ifelse(df$interest_7 == "Yes, I am interested in learning more", TRUE, FALSE)
 
 ```
 
@@ -71,17 +62,12 @@ Making the right decisions makes dollars – if a technology doesn't help you do
 Ask yourself, will this type of technology:
 
 * Increase my production?
-
 * Reduce my costs?
-
 * Increase my price received?
-
 * Increase my sustainability?
-
 * Make me sleep better at night?
 
-
-If the answer is "No" to all of these questions, then it is time to think again and find a different focus area within your business for your agtech investment.
+If the answer is "No" to all of these questions, then it is time to think again and find a different focus area within your business for your AgriTech investment.
 
 ![](./Headandfoot/Flowchart.png)
 
@@ -139,29 +125,107 @@ kable(mapsup, "latex", booktabs = T) %>%
 
 ```
 
+
+\newpage
+
 ### What questions should I ask?
 Your questions should be focussed on the specific application of the farm map you are going to develop to meet your business objective. Here are a few suggestions to get you started:
 
 * Does the price include all mapping features or do I need to pay more for additional services once I’ve started using the system?
-
 * Does the system provide 3-dimensional landscape mapping (important for planning reticulated watering systems)?
-
 * Can I import other mapping files (e.g. .shp or .kml) into this system, or do I have to start from scratch?
-
 * Can I export the map I created in a standard geographical information file format (e.g. a shape file or .kml)? (This is important as it allows you to change to a different provider later down the track without having to redo all your maps)
-
 * Does the farm mapping system allow me to take the map out into the field on a smartphone or tablet? And will it work offline?
-
 * Does the map integrate into any other farm management software? If so, what? 
 
-\vspace{40pt}
+\vspace{30pt}
 
 ![](./Headandfoot/propertymap.png)
+
 `r if(interest_1 == FALSE) {"-->"}`
 
 
 
 `r if(interest_2 == FALSE) {"<!--"}`
+\newpage
+
+## AUTOMATED WATER, RAINFALL, AND SOIL MOISTURE SENSORS
+AgriTech in beef production doesn't just have to focus on animals. There are many auxiliary solutions that can support decision making on your property. These include, but are not limited to, camera, moisture probes, weather stations, fencing monitors, pasture assessment, and irrigation management. This list goes on, and new solutions continue to join the market all the time.
+
+### What are the benefits?
+Of course, these products all claim increased efficiency and productivity under the right circumstances, but how these solutions fit into your own system need to be considered.
+
+In some cases, such as water monitoring, calculating the labour savings can quickly support purchasing a product. In other instances, the value is harder to quantify. This is where researching the available products and having a good understanding of how they fit into your system will prove valuable.
+
+For example, deploying multiple rain gauges on a property is unlikely to provide direct cost savings, but can support decision making, such as estimating forage availability, stocking rates, and paddock rotations. The outcomes of this can increase productivity.
+
+Finding the right AgriTech solution for your problem can improve productivity and/or provide peace of mind, but don't jump at the first option you find as there are several points to consider.
+
+### How should I go about finding the right sensors for my property?
+
+\begin{wrapfigure}{R}{.5\textwidth}
+  \begin{center}
+    \vspace{-10pt}
+    \includegraphics[width=.5\textwidth]{./Headandfoot/rainfall.png}
+    \vspace{-25pt}
+  \end{center}
+\end{wrapfigure}
+
+It can be a little tricky to find the right solution for your property, but increasing amounts of information are available through vendors and more and more case studies are reporting the benfits of these products. As livestock properties continue to embrace AgriTech, more vendors are coming to market increasing the number of available options. Be sure to see what each of the vendors can do for you now and into the future. Think about the scalability and what other products they may offer.
+
+System integrators tend to have hardware and software solutions to multiple problems, e.g. rainfall measuring, trough monitoring, and cameras. If you intend on investing in multiple AgriTech solutions, it may be worthwhile researching product lines from these vendors and selecting one based on your goals.
+
+Other vendors tend to focus on solving one problem very well. While they may offer the best product for your situation, the addition of more sensors to your property may bring with it additional infrastructure requirements, multiple apps, and multiple subscriptions.
+
+Increasingly, the aggregation of information from multiple AgriTech products has gained traction. Standalone aggregator platforms are relatively new but offer a single dashboard view of all of the data on your property. Information, such as weather stations, weather forecasts, EYCI prices, soil moisture, and livestock locations can all be presented in a single place, reducing the need for multiple apps and increasing the speed of decision making. If you are looking to purchase several products from multiple vendors, consider checking if they support these new aggregation platforms.
+
+\newpage
+
+### Where to start?
+Start with a problem and look into the current AgriTech solutions. Once you have found a product and vendor that can help solve these problems, see what else they may be able to offer you to help with decision making on farm. Consider if a system integratory or a standalone product is right for you and think about if you would like to leverage aggregator platforms in the future. Talking to Research and Development providers, such as CQUniversity, can also be a great starting point to assess what is currently available, where the value lies, and what could fit into your system.
+
+\vspace{15pt}
+
+\renewcommand{\arraystretch}{2}
+```{r rainfallsupplier, echo = FALSE}
+rainfallsup <- read.csv("./Headandfoot/rainfallsup.csv", stringsAsFactors = FALSE)
+colnames(rainfallsup)[5] <- "Are they at Beef21?"
+rainfallsup$Costs <- ""
+rainfallsup$`Are they at Beef21?` <- ""
+
+kable(rainfallsup, "latex", booktabs = T) %>%
+  kable_styling(font_size = 8, stripe_color = "lightblue", latex_options = "striped") %>%
+  column_spec(column = 1, width = "1in") %>%
+  column_spec(column = 2, width = "1.5in") %>%
+  column_spec(column = 3, width = "0.5in") %>%
+  column_spec(column = 4, width = "1.5in") %>%
+  column_spec(column = 5, width = "1in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+### What questions should I ask?
+The specific questions will change depending on sensor type, but the guidelines below will give you some idea of how suitable the vendor is for your property and situation.
+
+* Do you support aggregator platforms?
+* How do your devices communicate (particularly in remote areas)?
+* Can other products communicate using the same infrastructure?
+* I'm interested in "X" product, but what other products do you offer in your ecosystem?
+* What do the tangible benefits of using your system look like? How do you achieve them?
+* At what frequency do your products record data, or give alerts?
+* How do you provide alerts?
+* Do you have any new models in the pipeline?
+* Do you have any other products being developed?
+* Do you offer after sales support?
+* How is the information reported to me?
+* Can you walk me through your app?
+
+`r if(interest_2 == FALSE) {"-->"}`
+
+
+
+
+`r if(interest_3 == FALSE) {"<!--"}`
 \newpage
 
 ## FEED BASE MONITORING
@@ -179,31 +243,30 @@ In pastoral regions, the next level of more refined management involves short an
 
 In more intensive Southern Australian grazing systems where rotational grazing may be used, a more refined feed base management system may be of value. These allow you to plan around multiple paddock rotations and more dynamic pasture growth characteristics. Some systems use direct biomass measures (kg/ha), whilst others use animal grazing days. The end result (working out the balance of feed available and feed demand) is basically the same.
 
+\newpage
 
 ### Getting started
+
+\begin{wrapfigure}{R}{.4\textwidth}
+\begin{center}
+\vspace{-20pt}
+\includegraphics[width=.4\textwidth]{./Headandfoot/pasture1.png}
+\caption{An example of a photo reference used for comparison with your pastures. Source: StockTake Plus.}\
+\vspace{-40pt}
+\end{center}
+\end{wrapfigure}
+
 If you have never undertaken a pasture budget before and have access to a smartphone, try downloading the StockTake Plus app or exploring MLA's freely available Stocking Rate Calculator or Feed base planning and budgeting tool within a web browser.
 
 If you are already familiar with some basic feed budgeting, then it would be worth exploring some of the more advanced systems that integrate mapping, sensing, and rotational planning.
-
-\newpage
-
-\begin{wrapfigure}{R}{.4\textwidth}
-  \begin{center}
-    \vspace{-20pt}
-    \includegraphics[width=.4\textwidth]{./Headandfoot/pasture1.png}
-    \caption{An example of a photo reference used for comparison with your pastures. Source: StockTake Plus.}\
-  \end{center}
-\end{wrapfigure}
 
 One of the key challenges in this area is obtaining good estimates of pasture quality and quantity to input into the calculations. A simple, accurate, and free way to do this is to directly measure using quadrat cuts, but this is very time consuming. A quicker way is to use photo references, which are available in some systems.
 
 Another technique for assessing pasture involves the use of satellite sensing. Data from satellite imagery is converted to biomass measures (more commonly DMkg/ha). These systems are usually integrated with a farm mapping package and present data visually as a map. Some of these systems will require you to undertake periodic calibrating cuts and while this is time consuming, will increase the accuracy of the estimates the system provides you.
 
-One final piece of information that is required to complete a feed budget is the growth rate of the pasture (expressed as DMkg/ha/day). This information is most commonly derived from plant growth modelling, based on weather data and some satellite data. You can get estimates of growth rates from places like the Long Paddock FORAGE system (www.longpaddock.qld.gov.au/forage/). Some systems infer this growth from rainfall directly as a change to the potential animal grazing days and many producers find this a more intuitive way of handling the data.
+One final piece of information that is required to complete a feed budget is the growth rate of the pasture (expressed as DMkg/ha/day). This information is most commonly derived from plant growth modeling, based on weather data and some satellite data. You can get estimates of growth rates from places like the Long Paddock FORAGE system (www.longpaddock.qld.gov.au/forage/). Some systems infer this growth from rainfall directly as a change to the potential animal grazing days and many producers find this a more intuitive way of handling the data.
 
-\vspace{30pt}
-
-![An example of biomass calculation using satellite imagery. Source: Cibo Labs](./Headandfoot/pasture2.png)
+![An example of biomass calculation using satellite imagery. Source: Cibo Labs](./Headandfoot/pasture2.png){width=70%}
 
 \renewcommand{\arraystretch}{2}
 ```{r feedbasesupplier, echo = FALSE}
@@ -211,9 +274,6 @@ feedsup <- read.csv("./Headandfoot/feedsup.csv", stringsAsFactors = FALSE)
 colnames(feedsup)[5] <- "Are they at Beef21?"
 colnames(feedsup)[1] <- "Supplier"
 
-# knitr::kable(feedsup, align = "lllll", row.names = FALSE, format = "latex") %>%
-#   kable_styling(full_width = F) %>%
-#   kableExtra::landscape()
 kable(feedsup, "latex", booktabs = T) %>%
   kable_styling(font_size = 8, stripe_color = "lightblue", latex_options = "striped") %>%
   landscape() %>%
@@ -223,133 +283,24 @@ kable(feedsup, "latex", booktabs = T) %>%
   column_spec(column = 4, width = "2.5in") %>%
   column_spec(column = 5, width = "1in") %>%
   row_spec(0,bold=TRUE)
-# pander::pander(feedsup, split.table = Inf)
 
 ```
 
 ### What questions should I ask?
 
 * Is this system design for my particular region and operation?
-
 * What is the cost of different features of the system? Will I need to buy more advanced modules later on?
-
 * Where is the data stored once I input it into your system?
-
 * What data do I need to input into the system? E.g. current biomass, growth rates, wastage.
-
 * How does the system display the information? Does it provide a visualisation of all the information you need to make the key decisions?
-
 * If you have more than one person on the property, can the system handle multiple users and data updates (particularly when offline and out of WiFi/cell coverage)?
 
-`r if(interest_2 == FALSE) {"-->"}`
+`r if(interest_3 == FALSE) {"-->"}`
 
 
-
-`r if(interest_3_4 == FALSE) {"<!--"}`
+`r if(interest_4 == FALSE) {"<!--"}`
 \newpage
 
-## DATA MANAGEMENT
-Data is becoming an increasingly important and valuable resource. How you manage and secure your data will impact the value you get from it.
-
-The National Farmers Federation estimate that data driven solutions in the agriculture sector can potentially drive another $20.3 billion to the annual national farm output. However, they also note that most producers want to know what is happening with their data, who is getting access to it, and are unsure who they can trust.
-
-So what is data? In the context of your business, data is any recorded information that can be used to describe any part of your business. Data has to have two key parts – an "object" and a "value". The value will usually be defined by units of measure, for example, a monetary value ($) or a weight value (kg). The value of the object allows you to describe and compare the performance of different parts of your business.
-
-Enough technical talk! The critical thing to remember when looking at your data is to identify what and how an object (animal, paddock, etc.) is being described. Ideally, consistent long-term descriptions of your business will help you to better assess how your business is performing and what you can do to improve it.
-
-### Getting started
-Data is increasingly being captured and stored as digital records, however, a notebook with hand written notes is also a form of data. Digital data collection and sharing tools mean that you are now facing a deluge of data records. Some of these data are related to your business, but may have been collected by somebody else and you will need to track it down to get access to it.
-
-There are also many software and hardware companies that can provide you with valuable assistance in colelcting, storing, analysing, and reporting your data. It can be overwhelming trying to determine what is the best technical solution for your business. Before diving in and committing, take some time to work out a data plan and ask yourself a few key questions:
-
-* What data can you already access?
-
-* Where is your data currently sitting?
-
-* Do you own the data?
-
-* How often is the data updated?
-
-* What critical data are you currently not able to access?
-
-* How do you want to collect the new data? Do you want to automate it?
-
-* What do you want to do with the data? What do you want to better understand and aim to improve?
-
-* What current systems are you happy to use to manage and store your data?
-
-Remember that being able to compare data will provide you with information, giving insight and knowledge that will help improve business decisions.
-
-\renewcommand{\arraystretch}{2}
-```{r datamanagementsupplier1, echo = FALSE}
-datsup <- read.csv("./Headandfoot/datsup.csv", stringsAsFactors = FALSE)
-colnames(datsup)[5] <- "Are they at Beef21?"
-datsup1 <- datsup[c(1:9),]
-datsup2 <- datsup[c(10:12),]
-
-kable(datsup1, booktabs = T) %>%
-  kable_styling(font_size = 8, stripe_color = "lightblue", latex_options = "striped") %>%
-  landscape() %>%
-  column_spec(column = 1, width = "1in") %>%
-  column_spec(column = 2, width = "2.8in") %>%
-  column_spec(column = 3, width = "1.8in") %>%
-  column_spec(column = 4, width = "2.5in") %>%
-  column_spec(column = 5, width = "1in") %>%
-  row_spec(0,bold=TRUE)
-
-```
-
-\newpage
-
-```{r datamanagementsupplier2, echo = FALSE}
-kable(datsup2, row.names = FALSE, booktabs = T) %>%
-  kable_styling(font_size = 8, stripe_color = "lightblue", latex_options = "striped") %>%
-  landscape() %>%
-  column_spec(column = 1, width = "1in") %>%
-  column_spec(column = 2, width = "2.8in") %>%
-  column_spec(column = 3, width = "1.8in") %>%
-  column_spec(column = 4, width = "2.5in") %>%
-  column_spec(column = 5, width = "1in") %>%
-  row_spec(0,bold=TRUE)
-
-```
-
-
-### What questions should I ask?
-When you are ready to invest in software or hardware, ask many questions. Make sure the data management system allows you to meet your business goals.
-
-Ask the supplier of the equipment questions, for example:
-
-* Whether they share your data?
-
-* Who owns the data?
-
-* Where is it stored?
-
-* What happens if the data gets corrupted or lost?
-
-* What support do they provide?
-
-* Are they cloud based or can you access the data locally? If you have poor internet connection, you need to make sure you can access the data even if the internet is not working.
-
-* What format is the data stored in? Can you easily import it to your own system that you are familiar with? Can they provide some example data so you can test how it works?
-
-* Do they provide mobile and desktop tools? If you work mostly on your mobile device, then this might be critical for you getting value from your data.
-
-* Do they provide any data processing and analyses? And if so, what and how is it done and can you access the results?
-
-* Can you incorporate historical data into any data storage tools?
-
-* How does the data management tool help you meet your data driven goals that you outlined earlier?
-
-There are no right or wrong answers to these questions, but they should help you better understand what you are purchasing.
-
-`r if(interest_3_4 == FALSE) {"-->"}`
-
-
-
-`r if(interest_3 == FALSE) {"<!--"}`
-\newpage
 ## HERD AND ANIMAL PRODUCTION DATA RECORDING SYSTEMS
 Recording data on your herd, or even better, each animal, provides valuable information for decision making. Many people use a simple paper herd book, which is great, however, developing a digital recording system can provide more powerful insights into your business. Digital systems can also be backed up so that the data is not lost (when written records disappear). Data management systems most commonly require you to record the identity of an animal or herd along with a characteristic. These characteristics might be as simple as pregnancy or calving status, through to more complex information like liveweight gain.
 
@@ -364,6 +315,8 @@ Using a data management system in conjunction with a set of yard scales can prov
 
 ### Where to start?
 You can start recording simple animal data in a basic software system without too much financial outlay. Recording simple data, like which cows have calved and when, can be done without buying any expensive sensors. Many software systems provide free trials to their platforms, which are worth investigating. If you think you want to do more than simply record basic animal data in the future, it is worth exploring what each system can do in addition to these features. When it comes to recording data, nothing beats when you're out in the paddock or in the yards - double shuffling data from a notebook to the computer back in the office takes time. Many software systems have a smartphone app, which allows you to input data wherever you are. This can be really useful, but you need to check that these systems will still work offline or in areas of poor connectivity.
+
+\vspace{30pt}
 
 \begin{center}
 \includegraphics[width=.7\textwidth]{./Headandfoot/Herd1.png}
@@ -418,6 +371,7 @@ kable(herdsup2, booktabs = T) %>%
 herdsup3 <- read.csv("./Headandfoot/herdsup_software.csv", stringsAsFactors = FALSE)
 colnames(herdsup3)[5] <- "Are they at Beef21?"
 herdsup3$Costs <- ""
+herdsup3$`Are they at Beef21?` <- ""
 
 kable(herdsup3, booktabs = T) %>%
   kable_styling(font_size = 8, stripe_color = "lightblue", latex_options = "striped") %>%
@@ -430,37 +384,31 @@ kable(herdsup3, booktabs = T) %>%
 
 ```
 
-`r if(interest_3 == FALSE) {"-->"}`
-
-
-
-`r if(interest_4 == FALSE) {"<!--"}`
 \newpage
-## ON-ANIMAL SENSORS AND VIRTUAL FENCING
-You have indicated that you are interested in using on-animal sensors or virtual fencing technologies.
 
-These technologies are only really now emerging in the beef industry. This means that they may not necessarily "work out of the box", and you need to expect to be an "early adopter" and you will likely be involved in the development process. These technologies are great candidates for on-farm research and development projects, such as MLA's Producer Demonstration Site program.
+### What questions should I ask?
+* How much does the system cost? Do I pay more for more advanced features?
+* Does the system integrate with NLIS reporting requirements?
+* Does the system provide more advanced features that might be of interest in the future?
+* Is the system reliant on internet connectivity?
+* Can you have more than one user?
 
-### What are the benefits?
-On-animal sensors
-On-animal sensors, a.k.a smart tags, allow animals to be monitored 24 hours a day 7 days a week, a frequency that cannot be achieved through physical observation of animals alone. The frequent monitoring means that it is possible to remotely obtain up to date information about your animals, with the potential to diagnose a range of issues in a timely manner.
-
-The information gathered by on-animal sensors fall into two broad categories: location and behaviour. Location sensors (GPS/GIS) collect information on the location of animals and can be used to assist producers to remotely locate animals to improve mustering times, understand grazing distributions of animals, and/or understand water source usage. Behaviour sensors (accelerometers and IMU) collect information on the movement of an animal and can be used to determine what behaviour that animal is exhibiting, i.e. standing, grazing, walking, or ruminating. This information can be used to help identify changes in daily behaviour and alert to instances where an animal's physiological state has changed, i.e. that an animal is lame, impacted by disease or other health issues, experiencing oestrus, or has started calving.
+\begin{center}
+\includegraphics{./Headandfoot/Herd2.png}
+\end{center}
 
 `r if(interest_4 == FALSE) {"-->"}`
 
-
-
-`r if(interest_5 == FALSE) {"<!--"}`
+`r if(interest_5 == FALSE) {"-->"}`
 \newpage
 
-## Objective genetic measurement tools
+## GENETIC EVALUATION AND MANAGEMENT TECHNOLOGIES
 You have indicated that you are interested in using objective genetic measurement tools. So let's get started!
 
 ### What are the benefits?
 There are a number of benefits to utilising objective genetic measurement and selection tools, the most important of which is accelerating the rate of improvement in your herd so that you can maximise your business returns.
 
-When used in conjunction with visual selection techniques (AgTech is designed to complement these methods, not replace them), genetic measurement tools can support joining and culling decisions, ultimately increasing the rate of herd improvement.
+When used in conjunction with visual selection techniques (AgriTech is designed to complement these methods, not replace them), genetic measurement tools can support joining and culling decisions, ultimately increasing the rate of herd improvement.
 
 The end results will depend on your business focus, and can include more beef per hectare, higher joining and calving rates, a shorter tail in your mob, faster growth rates, better fat cover, improved calving and weaning weights, or simply more confidence that you have purchased the right bull on sale day.
 
@@ -484,7 +432,7 @@ Studs or more intensive breeding operations can use this information when using 
 
 If you are a stud breeder participating in BREEDPLAN, you will need to comply with its performance recording protocols, which have been implemented to ensure consistency in data gathering and analysis methods across a wide range of traits. This improves the accuracy of EBVs for both vendors and buyers of breeding cattle.
 
-The more breeders that participate in BREEDPLAN, the more accurate EBVs become, as do the predictions made from DNA testing. DNA testing is the most advanced form of objective genetic assessment technolgoy available, with tests available that are customised to both stud and commercial producers, and for different breeds.
+The more breeders that participate in BREEDPLAN, the more accurate EBVs become, as do the predictions made from DNA testing. DNA testing is the most advanced form of objective genetic assessment technology available, with tests available that are customised to both stud and commercial producers, and for different breeds.
 
 However, the range of traits that can be currently tested for beef cattle is limited - use of DNA technology therefore should be aligned with your business and breeding objectives to ensure you obtain maximum value from the information provided.
 
@@ -500,9 +448,6 @@ gensup1 <- gensup[c(1:9),]
 gensup2 <- gensup[c(10:19),]
 gensup3 <- gensup[c(20:21),]
 
-# knitr::kable(mapsup, align = "lllll", row.names = FALSE, format = "latex") %>%
-#   kable_styling(full_width = F) %>%
-#   kableExtra::landscape()
 kable(gensup1, booktabs = T) %>%
   kable_styling(font_size = 8, stripe_color = "lightblue", latex_options = "striped") %>%
   landscape() %>%
@@ -549,49 +494,170 @@ kable(gensup3, row.names = FALSE, booktabs = T) %>%
 Your questions should be focussed on your specific breeding objective for your herd. Here are a few suggestions to get you started:
 
 * What genetic traits does the technology report on?
-
 * Is the software compatible with my NLIS reader and the NLIS database?
-
 * Does the paddock-based hardware require an internet connection?
-
 * Can animal data be collected offline and uploaded to the software later?
-
 * Does the service allow you to compare your herd with other animals?
-
 * Does the service allow you to compare the performance of individual animals within your herd?
-
 * Does the service allow you to compare the performance of individual animals between breeds?
-
 * How do I interpret the reports provided by the technology?
-
 * How will the technology help met to select better genetics?
-
 * How do I balance this new information with other insights I have and into the genetic performance of my cattle? E.g. information provided by bull suppliers or visual assessments.
-
 * When reading reports from the technology, which traits or measures should I put the most emphasis on?
-
 * What is the cost of the technology/service? And what financial return should I expect from that investment?
-
 * Do I have to be a member of a breed society to use this technology?
-
 * Can you help me redesign my breeding program to maximise value from your technology?
-
 * I'm going to have more questions later - do you provide after sale support?
 
+`r if(interest_5 == FALSE) {"<!--"}`
 
 
+`r if(interest_6 == FALSE) {"-->"}`
+\newpage
 
+## AUTOMATED LIVESTOCK MONITORING AND MANAGEMENT
 
-`r if(interest_5 == FALSE) {"-->"}`
+\begin{wrapfigure}{R}{.5\textwidth}
+  \begin{center}
+    \vspace{-10pt}
+    \includegraphics[width=.5\textwidth]{./Headandfoot/wow1.jpg}
+    \vspace{-10pt}
+  \end{center}
+\end{wrapfigure}
 
+There are a range of technologies emerging that automate the process of collecting measures of animal traits using in-paddock systems. These systems face fewer limitations when it comes to providing a consistent power source (usually a solar panel), data storage, and connectivity, and provide a reliable method to remotely monitoring your animals on a regular basis. Most in-paddock systems utilise an incentive to encourage regular visitation, e.g. supplementation or water. The most effective incentives are high value and cannot be accessed elsewhere, such as a sole watering point.
+
+The most "commercially ready" tool that is currently available is the walk-over-weigh system, which is designed to capture animal liveweight. Companies providing walk-over-weigh systems may be focussed on providing the hardware alone, or have additional algorithms to gain more value and information from your animal liveweight data, e.g. calving date detection. This will be something you will need to consider when looking at walk-over-weigh providers. 
+
+Other in-paddock tools, like auto-drafters, are still in their infancy, however, it is possible to access auto-drafting technology if you don't mind the high price tag.
+
+### What are the benefits?
+As with any investment, the cost of benefits should outweigh the cost of the item itself. The initial outlay for a walk-over-weigh system can range from \$7,500 to upwards of \$28,000, however, this needs to be weighed up against the value of consistent liveweight data, improved productivity and efficiency, and savings in labour units.
+
+The information gathered using in-paddock walk-over-weigh technologies can be used to provide regular, accurate data to enable better individual animal management and assist in making management decisions. This increased level of individual animal monitoring can dramatically enhance genetic progression within herds, allowing commercial producers to more accurately select for animals with desirable traits. When integrated with auto-drafting technology, these sensors allow producers to remotely subset the herd for supplementation, health treatments, or to sell.
+
+### How should I go about implementing these systems?
+When investing in a remote monitoring unit, there are many things to consider, the first of which is, what information do you want to collect? Are you interested in genetic performance recording, growth rates, or suitability for market?
+
+It is also important to think about the logisitics and suitability of differing technologies to your operation. Do you need a portable unit to move from paddock to paddock? Or will the system remain in one area? What attractant will you use to encourage animals to visit the system and are they available elsewhere?
+
+### Where to start?
+The first step would be to determine which supplier would best suit your needs. Get in touch with a prospective supplier and have a chat about your goals and property set up and how their system works, to figure out whether you would be a good match.
+
+\renewcommand{\arraystretch}{2}
+```{r wowsupplier, echo = FALSE}
+wowsup <- read.csv("./Headandfoot/wowsup.csv", stringsAsFactors = FALSE)
+colnames(wowsup)[5] <- "Are they at Beef21?"
+wowsup$`Are they at Beef21?` <- ""
+
+kable(wowsup, "latex", booktabs = T) %>%
+  kable_styling(font_size = 8, stripe_color = "lightblue", latex_options = "striped") %>%
+  landscape() %>%
+  column_spec(column = 1, width = "1in") %>%
+  column_spec(column = 2, width = "2.8in") %>%
+  column_spec(column = 3, width = "1.8in") %>%
+  column_spec(column = 4, width = "2.5in") %>%
+  column_spec(column = 5, width = "1in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+### What questions should I ask?
+* How much is the start-up cost?
+* How much is the monthly/annual subscription?
+* What sort of support will you provide me? If so, will that cost extra or is it free?
+* Is there other equipment I will need to purchase on top of the system (such as panels for enclosure fencing)?
+* How is the data being transmitted? E.g. 3G/4G, satellite
+* Are there extra costs associated with a satellite connection?
+* Are there offline options?
+* If a new/updated version of the platform becomes available, will my system get updated automatically? If so, is there an extra cost?
+* How can I access the data? Is there a dashboard available and if so, can you walk me through it?
+* Where will my data be stored if an outage occurs?
+* Will I need to train my cattle to use these systems?
+* If I am enclosing the sole watering source in the paddock, how do I know that my cattle are accessing water?
+* How is the system powered?
+* What is the anticipated lifetime of the product?
+
+\vspace{30pt}
+
+![](./Headandfoot/wow.png)
 
 
 `r if(interest_6 == FALSE) {"<!--"}`
 
+
+
+`r if(interest_7 == FALSE) {"<!--"}`
 \newpage
-## Financial data recording and/or analysis
-Financial data recording and/or analysis
+## ON-ANIMAL SENSORS AND VIRTUAL FENCING
+You have indicated that you are interested in using on-animal sensors or virtual fencing technologies.
 
-`r if(interest_6 == FALSE) {"-->"}`
+These technologies are only really now emerging in the beef industry. This means that they may not necessarily "work out of the box", and you need to expect to be an "early adopter" and you will likely be involved in the development process. These technologies are great candidates for on-farm research and development projects, such as MLA's Producer Demonstration Site program.
+
+### What are the benefits?
+**On-animal sensors**
+
+\begin{wrapfigure}{R}{.4\textwidth}
+  \begin{center}
+    \vspace{-20pt}
+    \includegraphics[width=.4\textwidth]{./Headandfoot/onanimalsensor.png}
+    \vspace{-50pt}
+  \end{center}
+\end{wrapfigure}
+
+On-animal sensors, a.k.a smart tags, allow animals to be monitored 24 hours a day 7 days a week, a frequency that cannot be achieved through physical observation of animals alone. The frequent monitoring means that it is possible to remotely obtain up to date information about your animals, with the potential to diagnose a range of issues in a timely manner.
+
+The information gathered by on-animal sensors fall into two broad categories: location and behaviour. Location sensors (GPS/GIS) collect information on the location of animals and can be used to assist producers to remotely locate animals to improve mustering times, understand grazing distributions of animals, and/or understand water source usage. Behaviour sensors (accelerometers and IMU) collect information on the movement of an animal and can be used to determine what behaviour that animal is exhibiting, i.e. standing, grazing, walking, or ruminating. This information can be used to help identify changes in daily behaviour and alert to instances where an animal's physiological state has changed, i.e. that an animal is lame, impacted by disease or other health issues, experiencing oestrus, or has started calving.
+
+**Virtual fencing**
+
+Virtual fencing (VF) enables the management of the location of grazing animals. This technology enables graziers to implement more complex grazing rotations without having to build internal fencing. The primary benefits come through improved pasture utilisation and reduced labour costs. While VF has a lot of potential, there are still some key challenges in the deployment of these systems.
+
+\newpage
+
+### How should I go about setting up an on-animal sensor system?
+When investing in an on-animal sensor system, there are a number of things to consider, including:
+
+* What is it that you want to achieve by using on-animal sensors?
+* Are you wanting to collect information on all your animals or just a selection, e.g. bulls or breeding females?
+* Would a collar or ear tag device work best for you?
+* What area do your animals inhabit? Is it one large paddock or multiple smaller paddocks?
+* Do you have phone coverage across your property or is coverage limited?
+
+Between all the suppliers offering on-animal sensor options, you should be able to find one that meets your needs. It is important to ask questions of suppliers as there are pros and cons to every sensor option and finding the one that best suits your herd, environment, and pocket is important.
+
+### Where to start?
+If you are only just starting out, we suggest taking a moment to determine what it is you are wanting to get out of an on-animal system. Are you wanting it to identify livestock location, e.g. for improving mustering efficiency? Or are you wanting to use it to assist with health monitoring of your herd? Do you want a system that can do both?
+
+Once you know what it is you want the system to do, we then suggest speaking to those companies that offer systems relevant to your needs, i.e. look for systems that use GPS/GIS if you want to locate your livestock and look for systems that use accelerometers if you want more in depth behavioural and monitoring information.
 
 
+```{r onanimalsupplier, echo = FALSE}
+onansup <- read.csv("./Headandfoot/onansup.csv", stringsAsFactors = FALSE)
+colnames(onansup)[5] <- "Are they at Beef21?"
+
+kable(onansup, booktabs = T) %>%
+  kable_styling(font_size = 8, stripe_color = "lightblue", latex_options = "striped") %>%
+  landscape() %>%
+  column_spec(column = 1, width = "1in") %>%
+  column_spec(column = 2, width = "2.8in") %>%
+  column_spec(column = 3, width = "1.8in") %>%
+  column_spec(column = 4, width = "2.5in") %>%
+  column_spec(column = 5, width = "1in") %>%
+  row_spec(0,bold=TRUE)
+
+```
+
+### What questions should I ask?
+* What features does this system provide? Is it just location information or can I get health/behaviour information?
+* Is pricing a one-off cost or does it require a monthly/yearly subscription? Do I need to pay more for additional features?
+* What infrastructure is required other than the eartag/collar device? Is this an additional cost?
+* Is this system suitable for extensive grazing environments?
+* How long do the units last? Are the batteries rechargeable?
+* Do I have to tag all my animals or would a subset (e.g. 10% of the herd) be sufficient?
+* How accurate is the information that is recorded? I.e. are animals within 10m or 100m of the recorded location?
+* How often will I receive information?
+* Can I access the system/information in the field on a smartphone or tablet? And will it work offline?
+* Does the system integrate into any other farm management software?
+
+`r if(interest_7 == FALSE) {"-->"}`
