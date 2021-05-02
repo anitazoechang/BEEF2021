@@ -10,17 +10,17 @@ library(tidyverse)
 library(DT)
 # remotes::install_github("anitazoechang/BEEF2021functions@main")
 
-user <<- as.character(Sys.getenv("user"))
-pass <<- as.character(Sys.getenv("pass"))
+# user <<- as.character(Sys.getenv("user"))
+# pass <<- as.character(Sys.getenv("pass"))
 
-url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin",
-                user, pass)
-db <- mongolite::mongo(collection = "BeefWoWData", db = "DMIoT", url = url, verbose = T)
-weight <- db$find() %>%
-  filter(Wt != 0)
-weight <- weight[which.max(weight$datetime),]
-weight <- weight$Wt
-weight <<- as.numeric(weight)
+# url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin",
+#                 user, pass)
+# db <- mongolite::mongo(collection = "BeefWoWData", db = "DMIoT", url = url, verbose = T)
+# weight <- db$find() %>%
+#   filter(Wt != 0)
+# weight <- weight[which.max(weight$datetime),]
+# weight <- weight$Wt
+# weight <<- as.numeric(weight)
 
 
 ##### Shiny server #####
@@ -28,6 +28,15 @@ Shinyserver <- function(input, output, session) {
   
   user <<- as.character(Sys.getenv("user"))
   pass <<- as.character(Sys.getenv("pass"))
+  
+  url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin",
+                 user, pass)
+  db <- mongolite::mongo(collection = "BeefWoWData", db = "DMIoT", url = url, verbose = T)
+  weight <- db$find() %>%
+    filter(Wt != 0)
+  weight <- weight[which.max(weight$datetime),]
+  weight <- weight$Wt
+  weight <<- as.numeric(weight)
   
   schools <<- get_school(username = user, password= pass)
   
@@ -91,7 +100,8 @@ Shinyserver <- function(input, output, session) {
         fluidRow(align = "center", actionButton("addschool", label = "Add new entry", style = "color: #6d6e71")),
         fluidRow(h4("Leaderboard", color = "#6e6d71"), align = "center"),
         fluidRow(column(width = 2, div(style = "height:10px"))),
-        dataTableOutput("leaderboardtext")
+        dataTableOutput("leaderboardtext"),
+        fluidRow(align = "center", actionButton("refresh", label = "Refresh session", style = "color: #6d6e71")),
     )
   })
   
@@ -123,6 +133,14 @@ Shinyserver <- function(input, output, session) {
   observeEvent(input$addschool, {
     if(input$addschool == 1){
       showModal(addschoolmodal)
+    }
+  })
+  
+  
+  # Add school modal
+  observeEvent(input$refresh, {
+    if(input$refresh == 1){
+      session$reload()
     }
   })
   
