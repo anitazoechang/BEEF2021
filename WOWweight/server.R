@@ -26,8 +26,8 @@ library(DT)
 ##### Shiny server #####
 Shinyserver <- function(input, output, session) {
   
-  user <<- as.character(Sys.getenv("user"))
-  pass <<- as.character(Sys.getenv("pass"))
+  user <<- "LaurenOconnor"
+  pass <<- "DataMuster"
   
   url <- sprintf("mongodb://%s:%s@datamuster-shard-00-00-8mplm.mongodb.net:27017,datamuster-shard-00-01-8mplm.mongodb.net:27017,datamuster-shard-00-02-8mplm.mongodb.net:27017/test?ssl=true&replicaSet=DataMuster-shard-0&authSource=admin",
                  user, pass)
